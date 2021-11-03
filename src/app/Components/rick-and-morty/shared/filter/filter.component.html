@@ -1,0 +1,14 @@
+<div class="filter_box">
+    <div *ngFor="let filter of filterOptions">
+        <div class="filter_element">
+            {{filter.display_name}}:
+            <input  *ngIf="filter.html_tag === 'input'" type={{filter.type!}} id={{filter.id}}
+                (change)="addToFilter($event)">
+            <select class="filter_element" *ngIf="filter.html_tag === 'select'" id={{filter.id}}
+                (change)="addToFilter($event)">
+                <option *ngFor="let option of filter.options!" value={{option.value}}>{{option.display_value}}</option>
+            </select>
+        </div>
+    </div>
+    <button class="filter_button" type="button" (click)=outputFilter()>Filter</button>
+</div>

@@ -1,0 +1,10 @@
+<div *ngIf="!specificSearch">
+    <ram-filter [filterOptions]="filterOptions" ($emitFilters)="filterList($event)"> </ram-filter>
+</div>
+<div *ngIf="data">
+    <ram-list [listOptions]="listOptions" [listObjects]="data.results"> </ram-list>
+</div>
+<div *ngIf="!specificSearch && data && data.info ">
+    <ram-paginator [next]="data.info.next" [prev]="data.info.prev" ($emitPage)="getPage($event)">
+    </ram-paginator>
+</div>

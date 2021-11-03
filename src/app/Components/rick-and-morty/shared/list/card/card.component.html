@@ -1,0 +1,39 @@
+<div *ngFor="let listOption of listOptions">
+    <div
+        *ngIf="listOption.nestedOptions !== undefined && getProperty(listOption.objectPropertyName).length > 0; else notNested">
+        <div>
+            <div class="nestedObjectButton" *ngIf="!nestedObjectOpen" (click)="nestedObjectOpen = !nestedObjectOpen">
+                {{listOption.name}}: &#11166;
+            </div>
+            <div *ngIf="nestedObjectOpen">
+                <div class="nestedObjectButton" (click)="nestedObjectOpen = !nestedObjectOpen">
+                    {{listOption.name}}: &#11167;
+                </div>
+                <div *ngIf="  (observable | async) as newListObejct$ ">
+                    <ram-list [listOptions]="listOption.nestedOptions" [listObjects]="newListObejct$">
+                    </ram-list>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #notNested>
+        <div 
+            *ngIf="listOption.arrayLink !== undefined && getProperty(listOption.arrayLink).length > 0; else notArrayLink ">
+            <a class="clickableField" href="{{getArrayLink(listOption.arrayLink)}}">
+                {{listOption.name}}:
+                {{getProperty(listOption.objectPropertyName)}}</a>
+        </div>
+    </ng-template>
+    <ng-template #notArrayLink>
+        <div *ngIf="listOption.link !== undefined && getProperty(listOption.link).length > 0; else notLink ">
+            <a class="clickableField" href="{{getLink(listOption.link)}}">
+                {{listOption.name}}:
+                {{getProperty(listOption.objectPropertyName)}}</a>
+        </div>
+    </ng-template>
+    <ng-template #notLink>
+        <div class="field">
+            {{listOption.name}}: {{getProperty(listOption.objectPropertyName)}}
+        </div>
+    </ng-template>
+</div>

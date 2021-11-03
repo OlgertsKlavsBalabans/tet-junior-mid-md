@@ -1,0 +1,4 @@
+<div>
+    <button class="paginationButton" *ngIf="prev" (click)=emitPage(prev)>Previous</button>
+    <button class="paginationButton" *ngIf="next" (click)=emitPage(next)>Next</button>
+</div>
