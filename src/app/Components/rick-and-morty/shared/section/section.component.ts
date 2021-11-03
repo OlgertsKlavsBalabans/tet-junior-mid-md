@@ -28,14 +28,12 @@ export class SectionComponent implements OnInit {
       let params = "[" + this.activatedRoute.snapshot.paramMap.get("id") + "]";
       this.baseUrl = this.baseUrl + params;
       this.restObjectsService.getObject<any[]>(this.baseUrl).subscribe(data => {
-        console.log(data);
         this.data = {
           results: data,
         }
       });
     } else {
       this.restObjectsService.getObject<IDataREST>(this.baseUrl).subscribe(data => {
-        console.log(data);
         this.data = data;
       });
     }
@@ -43,14 +41,12 @@ export class SectionComponent implements OnInit {
 
   filterList(filter: IFilter[]): void {
     this.restObjectsService.getFilteredObject<IDataREST>(filter, this.baseUrl).subscribe(data => {
-      console.log(data);
       this.data = data;
     });
   }
 
   getPage(url: string): void {
     this.restObjectsService.getObject<IDataREST>(url).subscribe(data => {
-      console.log(data);
       this.data = data;
     });
   }
